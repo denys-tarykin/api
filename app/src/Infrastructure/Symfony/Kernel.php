@@ -20,24 +20,14 @@ class Kernel extends BaseKernel
     {
         $container->import($this->getProjectDir() . '/config/{packages}/*.yaml');
         $container->import($this->getProjectDir() . '/config/{packages}/'.$this->environment.'/*.yaml');
-
-        if (is_file(\dirname(__DIR__).'/config/services.yaml')) {
-            $container->import($this->getProjectDir() . '/config/services.yaml');
-            $container->import($this->getProjectDir() . '/config/{services}_'.$this->environment.'.yaml');
-        } elseif (is_file($path = \dirname(__DIR__).'/config/services.php')) {
-            (require $path)($container->withPath($path), $this);
-        }
+        $container->import($this->getProjectDir() . '/config/services.yaml');
+        $container->import($this->getProjectDir() . '/config/{services}_'.$this->environment.'.yaml');
     }
 
     protected function configureRoutes(RoutingConfigurator $routes): void
     {
         $routes->import($this->getProjectDir() . '/config/{routes}/'.$this->environment.'/*.yaml');
         $routes->import($this->getProjectDir() . '/config/{routes}/*.yaml');
-
-        if (is_file(\dirname(__DIR__).'/config/routes.yaml')) {
-            $routes->import($this->getProjectDir() . '/config/routes.yaml');
-        } elseif (is_file($path = \dirname(__DIR__).'/config/routes.php')) {
-            (require $path)($routes->withPath($path), $this);
-        }
+        $routes->import($this->getProjectDir() . '/config/routes.yaml');
     }
 }

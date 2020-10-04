@@ -50,3 +50,7 @@
 
 # Embedded web-server pid file
 /.web-server-pid
+/.idea/vcs.xml
+/.idea/modules.xml
+/.idea/php.xml
+/.idea/
