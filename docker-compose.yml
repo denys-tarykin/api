@@ -7,4 +7,5 @@ services:
       - "8188:80"
     volumes:
       - ./app:/app
+      - ./etc/php/php.ini:/usr/local/etc/php/php.ini
     working_dir: /app

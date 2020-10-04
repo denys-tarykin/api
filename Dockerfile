@@ -9,6 +9,9 @@ RUN set -xe \
     && apk add --no-cache nginx \
     && apk add --no-cache shadow \
     && apk add --no-cache supervisor \
+    && apk add --no-cache $PHPIZE_DEPS \
+    && pecl install xdebug-2.9.8 \
+    && docker-php-ext-enable xdebug \
     # Workaround for existing files permissions
      && usermod -u 101 nginx \
     && groupmod -g 102 nginx \
@@ -20,6 +23,8 @@ COPY ./etc/supervisord.conf /etc/supervisord.conf
 COPY ./etc/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 COPY ./app /app
+
+RUN docker-php-ext-enable xdebug
 
 RUN mkdir /run/nginx
 
