@@ -1,0 +1,10 @@
+version: '2'
+services:
+  app-api:
+    build:
+      context: ./
+    ports:
+      - "8188:80"
+    volumes:
+      - ./app:/app
+    working_dir: /app
